@@ -1,0 +1,46 @@
+## Compilador - GCC para compilar C
+
+O GCC é um compilador de linguagem C. O compilador é o responsável por transformar 
+todo o código que escrevemos em linguagem C para código de máquina (afinal, o 
+computador não entende a linguagem C diretamente).
+
+## Memoria
+
+Em C é possivel utilizar uma variavel que não foi inicializada ainda, o problema é que
+o compilador não vai avisar e isso traz lixo de codigo que sobrou da ultima execução do codigo.
+
+## Binarios
+
+Base Binária: A memória do computador usa apenas dois estados (0 e 1) para representar informações.
+
+Bytes: Um byte é um conjunto de 8 bits.
+
+Inteiros em C: Um inteiro em C ocupa 4 bytes (32 bits), permitindo representar números grandes.
+
+## Bytes
+
+Byte é um conjunto de 8 bits. Em C, um inteiro tem 4 bytes, o que significa 32 bits. Com 32 bits, podemos representar 
+números grandes. Processadores de 8 bits, como os do Master System, podiam representar 256 números, enquanto os de 16 bits, 
+como os do Mega Drive, representavam até 65.535. Processadores modernos usam 64 bits, permitindo representar bilhões de 
+números e todos os caracteres dos alfabetos existentes.
+
+# 32 bits vs 64 bits
+
+A quantidade de bits no inteiro indica quantos bits aquela variável pode usar para representar o número. Se usarmos 32 bits, 
+por exemplo, nosso inteiro conseguirá representar por volta de 2^32 números diferentes. Já um inteiro de 64 bits consegue 
+representar por volta de 2^64 números.
+
+## Base Hexadecimal
+
+São números que usam até 16 algarismos para representar qualquer número (0 1 2 3 4 5 6 7 8 9 A B C D E F). Por exemplo, o 
+número 15, em hexa, é F, enquanto 16 é 10 , e 17 é 11. Interessantemente, o conjunto de todos os números em hexa representados 
+por 2 algarismos, ou seja, de 00 até FF (255) pode ser representado por 1 byte.
+
+## Ponteiros
+
+Ponteiros são endereçamentos de memoria para variaveis especificas que queremos usar fora do escopo de declaração dela, outras
+linguagens fazem nativo, mas C não, precisa apontar com o * e chamar ela usando o &
+
+## Array - Ponteiros
+
+Os ponteiros não se aplicam aos arrays porque eles são ponteiros por natureza, ele sempre vai apontar para o primeiro declarado
