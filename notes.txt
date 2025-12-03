@@ -44,3 +44,8 @@ linguagens fazem nativo, mas C não, precisa apontar com o * e chamar ela usando
 ## Array - Ponteiros
 
 Os ponteiros não se aplicam aos arrays porque eles são ponteiros por natureza, ele sempre vai apontar para o primeiro declarado
+
+## HeaderFiles
+
+"header files" (arquivos de cabeçalho) com a extensão .h. Esses arquivos contêm as declarações das funções e são usados para que 
+outros arquivos possam utilizar essas funções. Criamos um arquivo forca.h para declarar as funções do nosso jogo e o importamos no arquivo forca.c
