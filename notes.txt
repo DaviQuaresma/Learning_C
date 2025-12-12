@@ -49,3 +49,9 @@ Os ponteiros não se aplicam aos arrays porque eles são ponteiros por natureza,
 
 "header files" (arquivos de cabeçalho) com a extensão .h. Esses arquivos contêm as declarações das funções e são usados para que 
 outros arquivos possam utilizar essas funções. Criamos um arquivo forca.h para declarar as funções do nosso jogo e o importamos no arquivo forca.c
+
+## Matriz e vetor
+
+Uma matriz é uma abstração ainda maior. Ela é um ponteiro que aponta para uma lista de arrays. Como arrays são ponteiros, então uma matriz é um 
+ponteiro que aponta para uma lista de ponteiros. Ou seja, mapa é um ponteiro que aponta para outros ponteiros. Isso significa que mapa[0] é um 
+ponteiro que aponta para um array, mapa[1] é um ponteiro que aponta para outro array, e assim por diante.
