@@ -55,3 +55,16 @@ outros arquivos possam utilizar essas funções. Criamos um arquivo forca.h para
 Uma matriz é uma abstração ainda maior. Ela é um ponteiro que aponta para uma lista de arrays. Como arrays são ponteiros, então uma matriz é um 
 ponteiro que aponta para uma lista de ponteiros. Ou seja, mapa é um ponteiro que aponta para outros ponteiros. Isso significa que mapa[0] é um 
 ponteiro que aponta para um array, mapa[1] é um ponteiro que aponta para outro array, e assim por diante.
+
+## Comandos e execução basicos
+
+- Comando de build de um ou mais arquivos antes da execução, primeiro gcc que é o builder de C, os arquivos ou o arquivo, depois -o que é o identificador
+de saida, e o nome do arquivo de saida:
+
+gcc arquivo.c arquivo2.c -o arquivo.out
+gcc arquivo.c arquivo2.c -o ./pasta/arquivo.out
+
+- Comando de execução simples que apenas deve executar o arquivo criado ao ser chamado:
+
+arquivo.out
+

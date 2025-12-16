@@ -1,61 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "foge_foge.h"
+#include "mapa.h"
 
 MAPA mapa;
-
-void liberaMapa()
-{
-    for (int i = 0; i < mapa.linhas; i++)
-    {
-        free(mapa.mapa[i]);
-    }
-    free(mapa.mapa);
-}
-
-void alocaMapa()
-{
-    ////////////
-    // alocação dinâmica de matriz 5 x 10
-    // com dois ** você está alocando uma matriz, então você precisa colocar tambem dentro do sizeof o tamanho do tipo que você quer alocar, nesse caso é int*
-    // malloc serve para alocar memória em tempo de execução na unha e não deixar para a linguagem decidir de acordo com o escopo
-    mapa.mapa = malloc(sizeof(char *) * mapa.linhas); // aloca as linhas
-    for (int i = 0; i < mapa.linhas; i++)
-    {
-        mapa.mapa[i] = malloc(sizeof(char) * (mapa.colunas + 1));
-    }
-    ////////////
-}
-
-void leMapa()
-{
-    FILE *file;
-    file = fopen("mapa2.txt", "r");
-    if (file == NULL)
-    {
-        printf("Erro ao abrir o arquivo!\n");
-        return 1;
-    }
-
-    fscanf(file, "%d %d", &mapa.linhas, &mapa.colunas);
-
-    alocaMapa();
-
-    for (int i = 0; i < mapa.linhas; i++)
-    {
-        fscanf(file, "%s", mapa.mapa[i]);
-    }
-
-    fclose(file);
-}
-
-void imprimeMapa()
-{
-    for (int i = 0; i < mapa.linhas; i++)
-    {
-        printf("%s\n", mapa.mapa[i]);
-    }
-}
 
 int acabou()
 {
@@ -109,12 +57,11 @@ void move(char direcao)
 
 int main()
 {
-    leMapa();
+    leMapa(&mapa);
 
     do
     {
-        imprimeMapa();
-
+        imprimeMapa(&mapa);
         char comando;
         printf("Digite o comando (w/a/s/d): ");
         scanf(" %c", &comando);
@@ -123,7 +70,7 @@ int main()
 
     } while (!acabou());
 
-    liberaMapa();
+    liberaMapa(&mapa);
 
     return 0;
 }
