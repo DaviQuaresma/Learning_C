@@ -2,6 +2,29 @@
 #include <stdlib.h>
 #include "mapa.h"
 
+void andaNoMapa(MAPA* mapa, int xorigem, int yorigem, int xdestino, int ydestino)
+{
+    char personagem = mapa->mapa[xorigem][yorigem];
+    mapa->mapa[xdestino][ydestino] = personagem;
+    mapa->mapa[xorigem][yorigem] = VAZIO;
+}
+
+void encontraMapa(MAPA* mapa, POSICAO* pos, char alvo)
+{
+    for (int i = 0; i < mapa->linhas; i++)
+    {
+        for (int j = 0; j < mapa->colunas; j++)
+        {
+            if (mapa->mapa[i][j] == alvo)
+            {
+                pos->x = i;
+                pos->y = j;
+                return;
+            }
+        }
+    }
+}
+
 void liberaMapa(MAPA* mapa)
 {
     for (int i = 0; i < mapa->linhas; i++)

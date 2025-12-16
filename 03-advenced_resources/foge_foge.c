@@ -4,6 +4,7 @@
 #include "mapa.h"
 
 MAPA mapa;
+POSICAO heroi;
 
 int acabou()
 {
@@ -12,52 +13,46 @@ int acabou()
 
 void move(char direcao)
 {
+    direcao = tolower(direcao);
 
-    if (direcao != 'a' && direcao != 's' && direcao != 'w' && direcao != 'd')
-    {
-        printf("Comando inválido!\n");
+    if (direcao != ESQUERDA && direcao != CIMA && direcao != BAIXO && direcao != DIREITA)
         return;
-    }
 
-
-    int x;
-    int y;
-
-    for (int i = 0; i < mapa.linhas; i++)
-    {
-        for (int j = 0; j < mapa.colunas; j++)
-        {
-            if (mapa.mapa[i][j] == '@')
-            {
-                x = i;
-                y = j;
-                break;
-            }
-        }
-    }
+    int novo_x = heroi.x;
+    int novo_y = heroi.y;
 
     switch (direcao)
     {
-    case 'a':
-        mapa.mapa[x][y - 1] = '@';
+    case ESQUERDA:
+        novo_y--;
         break;
-    case 'w':
-        mapa.mapa[x - 1][y] = '@';
+    case CIMA:
+        novo_x--;
         break;
-    case 's':
-        mapa.mapa[x + 1][y] = '@';
+    case BAIXO:
+        novo_x++;
         break;
-    case 'd':
-        mapa.mapa[x][y + 1] = '@';
+    case DIREITA:
+        novo_y++;
         break;
     }
 
-    mapa.mapa[x][y] = '.';
+    if (novo_x >= mapa.linhas) return;
+    
+    if (novo_y >= mapa.colunas) return;
+
+    if (mapa.mapa[novo_x][novo_y] != VAZIO) return;
+
+    andaNoMapa(&mapa, heroi.x, heroi.y, novo_x, novo_y);
+
+    heroi.x = novo_x;
+    heroi.y = novo_y;
 }
 
 int main()
 {
     leMapa(&mapa);
+    encontraMapa(&mapa, &heroi, HEROI);
 
     do
     {
