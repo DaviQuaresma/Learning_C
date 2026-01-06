@@ -33,6 +33,11 @@ int ehvazia(MAPA* mapa, int x, int y)
     return 0;
 }
 
+int podeandar(MAPA* mapa, int x, int y)
+{
+    return ehvalida(mapa, x, y) && ehvazia(mapa, x, y);
+}
+
 void andaNoMapa(MAPA* mapa, int xorigem, int yorigem, int xdestino, int ydestino)
 {
     char personagem = mapa->mapa[xorigem][yorigem];
@@ -40,7 +45,7 @@ void andaNoMapa(MAPA* mapa, int xorigem, int yorigem, int xdestino, int ydestino
     mapa->mapa[xorigem][yorigem] = VAZIO;
 }
 
-void encontraMapa(MAPA* mapa, POSICAO* pos, char alvo)
+int encontraMapa(MAPA* mapa, POSICAO* pos, char alvo)
 {
     for (int i = 0; i < mapa->linhas; i++)
     {
@@ -50,10 +55,11 @@ void encontraMapa(MAPA* mapa, POSICAO* pos, char alvo)
             {
                 pos->x = i;
                 pos->y = j;
-                return;
+                return 1;
             }
         }
     }
+    return 0;
 }
 
 void liberaMapa(MAPA* mapa)

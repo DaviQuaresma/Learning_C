@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <ctype.h>
 #include "foge_foge.h"
 #include "mapa.h"
@@ -8,6 +9,30 @@ MAPA mapa;
 POSICAO heroi;
 
 
+int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino)
+{
+    int opcoes[4][2] = {
+        {xatual - 1, yatual}, // CIMA
+        {xatual + 1, yatual}, // BAIXO
+        {xatual, yatual - 1}, // ESQUERDA
+        {xatual, yatual + 1}  // DIREITA
+    };
+
+    srand(time(0));
+
+    for (int i = 0; i < 10; i++)
+    {
+        int posicao = rand() % 4;
+
+        if (podeandar(&mapa, opcoes[posicao][0], opcoes[posicao][1]))
+        {
+            *xdestino = opcoes[posicao][0];
+            *ydestino = opcoes[posicao][1];
+            return 1;
+        }
+        
+    }
+}
 
 void fantasmas()
 {
@@ -19,10 +44,17 @@ void fantasmas()
         for (int j = 0; j < mapa.colunas; j++)
         {
             if (copia.mapa[i][j] == FANTASMA){
-                if (ehvalida(&mapa, i, j + 1) && ehvazia(&mapa, i, j + 1))
+
+                int xdestino;
+                int ydestino;
+
+                int encontrou = praondefantasmavai(i, j, &xdestino, &ydestino);
+
+                if (encontrou)
                 {
-                    andaNoMapa(&mapa, i, j, i, j + 1);
+                    andaNoMapa(&mapa, i, j, xdestino, ydestino);
                 }
+                
             }
         }
     }
@@ -32,7 +64,9 @@ void fantasmas()
 
 int acabou()
 {
-    return 0;
+    POSICAO pos;
+    int fogefogenomapa = encontraMapa(&mapa, &pos, HEROI);
+    return !fogefogenomapa;
 }
 
 void move(char direcao)
@@ -61,12 +95,8 @@ void move(char direcao)
         break;
     }
 
-    if (novo_x >= mapa.linhas) return;
+    if (!podeandar(&mapa, novo_x, novo_y)) return;
     
-    if (novo_y >= mapa.colunas) return;
-
-    if (mapa.mapa[novo_x][novo_y] != VAZIO) return;
-
     andaNoMapa(&mapa, heroi.x, heroi.y, novo_x, novo_y);
 
     heroi.x = novo_x;
