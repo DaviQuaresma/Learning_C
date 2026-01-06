@@ -5,3 +5,4 @@
 
 int acabou();
 void move(char direcao);
+void fantasmas();

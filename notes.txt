@@ -66,5 +66,8 @@ gcc arquivo.c arquivo2.c -o ./pasta/arquivo.out
 
 - Comando de execução simples que apenas deve executar o arquivo criado ao ser chamado:
 
-arquivo.out
+./arquivo.out
 
+## Limpando dados da memoria
+
+Com a função memset você limpa todos os dados de um espaço de memoria

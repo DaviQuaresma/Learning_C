@@ -1,10 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "foge_foge.h"
 #include "mapa.h"
 
 MAPA mapa;
 POSICAO heroi;
+
+
+
+void fantasmas()
+{
+    MAPA copia;
+    copiamapa(&copia, &mapa);
+
+    for (int i = 0; i < mapa.linhas; i++)
+    {
+        for (int j = 0; j < mapa.colunas; j++)
+        {
+            if (copia.mapa[i][j] == FANTASMA){
+                if (ehvalida(&mapa, i, j + 1) && ehvazia(&mapa, i, j + 1))
+                {
+                    andaNoMapa(&mapa, i, j, i, j + 1);
+                }
+            }
+        }
+    }
+
+    liberaMapa(&copia);
+}
 
 int acabou()
 {
@@ -62,6 +86,7 @@ int main()
         scanf(" %c", &comando);
 
         move(comando);
+        fantasmas();
 
     } while (!acabou());
 
